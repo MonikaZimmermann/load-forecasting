@@ -1,0 +1,81 @@
+
+### Blacklist folders:
+data/*
+packages/*
+.bin/*
+.direnv/*
+
+### Blacklist files:
+
+# Secrets
+*secrets*
+
+# Latex related
+*.aux
+*.glo
+*.idx
+*.log
+*.toc
+*.ist
+*.acn
+*.acr
+*.alg
+*.bbl
+*.blg
+*.dvi
+*.glg
+*.gls
+*.ilg
+*.ind
+*.lof
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.out
+*.synctex.gz
+*.bcf
+*.xml
+*.bst
+*.fdb_latexmk
+*.fls
+*.rtf
+*.spl
+*.nav
+*.snm
+*.css
+*.js
+*.woff
+
+# R related
+*.Rhistory
+*.RDataTmp
+*.RData
+
+# Python binaries
+*.pyc
+*.npy
+
+# Binary and potentially large files
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.zip
+*.gz
+*.tar
+*.kmz
+*.svg
+# Matches Rds, RDS, rds, etc.
+*.[rR][dD][sS]
+
+# Data
+*.csv
+
+### Whitelist selected files:
+!data/example_witelisted.csv
+
+# Notes:
+# This file contains patterns for ignoring files/folders in a git repository.
+# To track a specific file ignored by this list, use: `git add -f path/to/file`.
+# Always evaluate the necessity of tracking such files.
