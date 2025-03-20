@@ -44,5 +44,5 @@ To get started, clone the repository
 
 
 ```bash
-git clone https://github.com/MonikaZimmermann/public-load-forecasting.git
+git clone https://github.com/MonikaZimmermann/load-forecasting.git
 cd public-load-forecasting
