@@ -13,6 +13,8 @@ library(zoo)
 library(dplyr)
 library(tidyr)
 
+# Load Forecasting Functions -------------------------------------------------------------------------------------
+source(here("code", "forecasting_functions.R"))
 
 # Load Data -------------------------------------------------------------------------------------
 # define zones
@@ -94,45 +96,6 @@ for (zn in zones) {
     models[[zn]] <- load$mod
     models_AR[[zn]] <- load$modres
 }
-
-
-# Plotting -------------------------------------------------------------------------------------
-# plot the forecasted and true load for the one year horizon
-
-# define the path to the 'plots'
-plot_path <- here("plots")
-
-for (zn in zones) {
-    plot_data <- data.frame(
-        Time = zone_data_list[[zn]][(D + 1):(D + H), ]$time_local_tz,
-        True = zone_data_list[[zn]][(D + 1):(D + H), ]$load_local_tz,
-        Forecasted = load_forecast[[zn]]
-    )
-
-    p <- ggplot(plot_data, aes(x = Time)) +
-        geom_line(aes(y = True, color = "True"), linewidth = 0.3, alpha = 0.3) +
-        geom_line(aes(y = Forecasted, color = "Forecasted"), linewidth = 0.3, alpha = 0.3, linetype = "dashed") +
-        scale_x_datetime(
-            breaks = seq(min(plot_data$Time), max(plot_data$Time), by = "4 weeks"),
-            labels = date_format("%b %Y"),
-            expand = c(0, 0)
-        ) +
-        scale_y_continuous(name = "Load [GW]") +
-        scale_color_manual(name = "Load", values = c("True" = "black", "Forecasted" = "blue")) +
-        labs(title = "Forecasted and True Load - One-Year Horizon", x = "Time") +
-        theme_minimal() +
-        theme_big +
-        theme(
-            legend.position = "top",
-            axis.text.x = element_text(angle = 45, hjust = 1),
-            panel.grid.major = element_line(size = 0.2, linetype = "dashed", colour = "lightgrey"),
-            panel.grid.minor = element_blank()
-        )
-
-    ggsave(filename = file.path(plot_path, paste0("Forecast_vs_True_", zn, ".pdf")), plot = p, width = 15, height = 5)
-}
-
-
 
 
 # Plotting -------------------------------------------------------------------------------------
@@ -311,4 +274,42 @@ for (zn in zones) {
     # save plot
     filename <- paste0(plot_path, "/Stack_Winter_plot_", zn, ".pdf")
     ggsave(filename, plot = p_stack, width = 6, height = 5)
+}
+
+
+
+# Plotting -------------------------------------------------------------------------------------
+# plot the forecasted and true load for the one year horizon
+
+# define the path to the 'plots'
+plot_path <- here("plots")
+
+for (zn in zones) {
+    plot_data <- data.frame(
+        Time = zone_data_list[[zn]][(D + 1):(D + H), ]$time_local_tz,
+        True = zone_data_list[[zn]][(D + 1):(D + H), ]$load_local_tz,
+        Forecasted = load_forecast[[zn]]
+    )
+
+    p <- ggplot(plot_data, aes(x = Time)) +
+        geom_line(aes(y = True, color = "True"), linewidth = 0.3, alpha = 0.3) +
+        geom_line(aes(y = Forecasted, color = "Forecasted"), linewidth = 0.3, alpha = 0.3, linetype = "dashed") +
+        scale_x_datetime(
+            breaks = seq(min(plot_data$Time), max(plot_data$Time), by = "4 weeks"),
+            labels = date_format("%b %Y"),
+            expand = c(0, 0)
+        ) +
+        scale_y_continuous(name = "Load [GW]") +
+        scale_color_manual(name = "Load", values = c("True" = "black", "Forecasted" = "blue")) +
+        labs(title = "Forecasted and True Load - One-Year Horizon", x = "Time") +
+        theme_minimal() +
+        theme_big +
+        theme(
+            legend.position = "top",
+            axis.text.x = element_text(angle = 45, hjust = 1),
+            panel.grid.major = element_line(size = 0.2, linetype = "dashed", colour = "lightgrey"),
+            panel.grid.minor = element_blank()
+        )
+
+    ggsave(filename = file.path(plot_path, paste0("Forecast_vs_True_", zn, ".pdf")), plot = p, width = 15, height = 5)
 }
