@@ -1,4 +1,4 @@
-# Public Load Forecasting Example
+# Mid-Term Hourly Load Forecasting - Zimmermann & Ziel (2025)
 
 This repository contains example R code for the mid-term hourly load forecasting model described in **Zimmermann & Ziel (2025, https://doi.org/10.1016/j.apenergy.2025.125444)**. It demonstrates how to apply the forecasting model using data from **France (FR) and Germany (DE)**. 
 
