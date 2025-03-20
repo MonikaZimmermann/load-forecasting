@@ -57,7 +57,7 @@ packages/*
 *.npy
 
 # Binary and potentially large files
-*.pdf
+#*.pdf
 *.jpg
 *.jpeg
 *.png
@@ -70,7 +70,7 @@ packages/*
 *.[rR][dD][sS]
 
 # Data
-*.csv
+#*.csv
 
 ### Whitelist selected files:
 !data/example_witelisted.csv
