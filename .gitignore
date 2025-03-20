@@ -1,6 +1,6 @@
 
 ### Blacklist folders:
-data/*
+#data/*
 packages/*
 .bin/*
 .direnv/*
